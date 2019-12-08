@@ -16,6 +16,12 @@ setTimeout(
 	}, 3 * 1000
 )
 
+setinterval(
+	function(counter) {
+		console("counter = "+counter);
+	}, 1000
+)
+
 console("script finished")
 
 JSON.stringify( {"a":a, "b":b, "c":c(5,6)})

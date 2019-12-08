@@ -1,8 +1,10 @@
 package event
 
+import "github.com/dop251/goja"
+
 // Task interface
 type Task interface {
-	HasFinished() bool
+	HasFinished(vm *goja.Runtime) bool
 }
 
 // Loop struct
@@ -25,11 +27,11 @@ func (current *Loop) Add(task Task) {
 }
 
 // IsEmpty method returns true if there are no any waiting async tasks for this loop
-func (current *Loop) IsEmpty() bool {
+func (current *Loop) IsEmpty(vm *goja.Runtime) bool {
 	var notFinishedTasks []Task
 
 	for i := range current.workingTasks {
-		if current.workingTasks[i].HasFinished() == false {
+		if current.workingTasks[i].HasFinished(vm) == false {
 			notFinishedTasks = append(notFinishedTasks, current.workingTasks[i])
 		}
 	}
