@@ -1,31 +1,40 @@
 package event
 
+// Task interface
 type Task interface {
 	HasFinished() bool
 }
 
+// Loop struct
 type Loop struct {
-	WorkingTasks []Task
+	workingTasks []Task
 }
 
+// NewLoop constructor
 func NewLoop() *Loop {
 	loop := &Loop{
-		WorkingTasks: []Task{},
+		workingTasks: []Task{},
 	}
-	
-	return loop;
+
+	return loop
 }
 
+// Add new task to event loop
+func (current *Loop) Add(task Task) {
+	current.workingTasks = append(current.workingTasks, task)
+}
+
+// IsEmpty method returns true if there are no any waiting async tasks for this loop
 func (current *Loop) IsEmpty() bool {
 	var notFinishedTasks []Task
 
-	for i := range current.WorkingTasks {
-		if current.WorkingTasks[i].HasFinished() == false {
-			notFinishedTasks = append(notFinishedTasks, current.WorkingTasks[i])
+	for i := range current.workingTasks {
+		if current.workingTasks[i].HasFinished() == false {
+			notFinishedTasks = append(notFinishedTasks, current.workingTasks[i])
 		}
 	}
 
-	current.WorkingTasks = notFinishedTasks
+	current.workingTasks = notFinishedTasks
 
-	return len(current.WorkingTasks) == 0
+	return len(current.workingTasks) == 0
 }

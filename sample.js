@@ -13,7 +13,7 @@ console("script started")
 setTimeout(
 	function(configuredTimeout) {
 		console("timeout called with configured delay = "+configuredTimeout);
-	}, 11
+	}, 3 * 1000
 )
 
 console("script finished")
