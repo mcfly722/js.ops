@@ -1,6 +1,7 @@
 ### JS.Ops
 
-DevOps platform to delegate business logic to developers without access to sensitive.
+DevOps platform to delegate business logic to developers without access to sensitive data like passwords and certs.
+
 
 Project not ready yet.
 
