@@ -16,10 +16,16 @@ setTimeout(
 	}, 3 * 1000
 )
 
-setinterval(
+setInterval(
 	function(counter) {
 		console("counter = "+counter);
 	}, 1000
+)
+
+run(
+	function(answer){
+		console("answer: "+ answer);
+	}, "123"
 )
 
 console("script finished")

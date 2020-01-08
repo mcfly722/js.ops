@@ -25,7 +25,7 @@ func process(scriptBody string, wg *sync.WaitGroup) {
 
 		vm := goja.New()
 
-		fconsole := func(msg string) {
+		fConsole := func(msg string) {
 			fmt.Println(msg)
 		}
 
@@ -37,9 +37,14 @@ func process(scriptBody string, wg *sync.WaitGroup) {
 			eventLoop.Add(event.NewInfiniteTimeScheduler(callback, intervalMilliseconds.ToInteger()))
 		}
 
-		vm.Set("console", fconsole)
+		fRun := func(callback goja.Callable, scriptBody string) {
+			eventLoop.Add(event.NewPowershellTask(callback, scriptBody))
+		}
+
+		vm.Set("console", fConsole)
 		vm.Set("setTimeout", fSetTimeout)
-		vm.Set("setinterval", fSetInterval)
+		vm.Set("setInterval", fSetInterval)
+		vm.Set("run", fRun)
 
 		v, err := vm.RunString(scriptBody)
 		if err != nil {
