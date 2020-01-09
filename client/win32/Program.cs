@@ -51,13 +51,14 @@ namespace WorkerService
 
             var serverCert = certificates[0];
             Console.WriteLine("Listening Certificate:" + SerializeCertificate(serverCert));
-
+            
             webBuilder.UseStartup<Startup>();
 
             webBuilder.ConfigureKestrel(kestrelServerOptions =>
                 {
                     kestrelServerOptions.ConfigureHttpsDefaults(opt =>
                     {
+                        opt.ServerCertificate = serverCert;
                         opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
                         opt.ClientCertificateValidation = (certificate, chain, errors) =>
                         {
